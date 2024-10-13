@@ -5,7 +5,7 @@ const generateRandomDate = () => {
   const today = new Date();
   const randomDaysAgo = Math.floor(Math.random() * 28) + 1;
   const randomDate = new Date(today.getTime() - randomDaysAgo * 24 * 60 * 60 * 1000);
-  return randomDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  return randomDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 };
 
 const viscosityOptions = [
@@ -17,7 +17,7 @@ const smellOptions = [
 ];
 
 const soundOptions = [
-  "Squelch", "Slurp", "Splat", "Squish", "Plop", "Slosh", "Gurgle", "Schlop", "Sploosh", "Flapping"
+  "Squelch", "Slurp", "Splat", "Squish", "Glug", "Slosh", "Gurgle", "Schlop", "Sploosh", "Flapping"
 ];
 
 const flowOptions = [
@@ -141,8 +141,14 @@ My last period might have been on ${lastPeriodDate}. It was ${viscosity.toLowerC
     <div style={cardStyle}>
       <h2 className="text-3xl font-bold text-pink-500 mb-4 text-center">JD Vance wants your blood.</h2>
       <p className="text-purple-700 mb-6 text-sm sm:text-base">
-        Senator Vance fought against federal privacy protections for your period data. He said cops and states need to access reproductive healthcare records to predict who might be trying to leave red states to get abortions.</p> 
-        <p>Cops don't become cops because they're good at math or data science. JD, you want this data for yourself, don't you?</p> 
+        Senator Vance fought against federal <a 
+        href="https://talkingpointsmemo.com/edblog/jd-vance-menstrual-surveillance-hawk"
+        style={{
+          textDecoration: 'underline',
+          cursor: 'pointer'
+        }}
+      >privacy protections for your period data.</a> <br></br><br></br>The letter he signed said that cops need to access reproductive healthcare records to predict who might be trying to leave red states to get abortions. 
+        <br></br><br></br>Cops don't become cops because they're good at math or data science. <br></br><br></br><b>Nice try JD, don't be shy, you want the bloody details for yourself, don't you?</b> </p>
       <button 
         onClick={() => setShowIntro(false)} 
         className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-300"
@@ -213,14 +219,14 @@ My last period might have been on ${lastPeriodDate}. It was ${viscosity.toLowerC
     <div style={cardStyle}>
       <h2 className="text-3xl font-bold text-pink-500 mb-4 text-center">Dear JD,</h2>
       <p className="text-purple-700 mb-6 text-sm sm:text-base">
-        I heard how bad you wanted to know about my period. It might have been on {lastPeriodDate}. It was {viscosity.toLowerCase()} and smelled {smell.toLowerCase()}. 
+        I heard how bad you wanted to know about my period. It might have started on {lastPeriodDate}. It was {viscosity.toLowerCase()} and smelled {smell.toLowerCase()}. 
         When the blood {flow.toLowerCase()} out, it made a {sound.toLowerCase()} sound. 
         <br></br>
         <br></br>Enjoy, you little freak.
       </p>
       <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
         <button onClick={shareToInstagram} className="flex-1 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-300">
-          Tag him on IG
+          Tag @jdvance on IG
         </button>
         <button onClick={emailToJD} className="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-300">
           Email him
@@ -278,7 +284,7 @@ My last period might have been on ${lastPeriodDate}. It was ${viscosity.toLowerC
             textAlign: 'center',
             lineHeight: 1.4,
           }}>
-            I heard how badly you want to know about mhy period. My last period might have been on {lastPeriodDate}. It was {viscosity.toLowerCase()} and smelled {smell.toLowerCase()}. 
+            I heard how badly you want to know about mhy period. My last period might have started on {lastPeriodDate}. It was {viscosity.toLowerCase()} and smelled {smell.toLowerCase()}. 
             When the blood {flow.toLowerCase()} out, it made a {sound.toLowerCase()} sound. Enjoy, you little freak.
           </p>
         </div>
