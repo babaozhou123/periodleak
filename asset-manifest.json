@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/periodleaks/static/css/main.102ca8b5.css",
+    "main.js": "/periodleaks/static/js/main.294194f8.js",
+    "static/js/453.0593f6ce.chunk.js": "/periodleaks/static/js/453.0593f6ce.chunk.js",
+    "index.html": "/periodleaks/index.html",
+    "main.102ca8b5.css.map": "/periodleaks/static/css/main.102ca8b5.css.map",
+    "main.294194f8.js.map": "/periodleaks/static/js/main.294194f8.js.map",
+    "453.0593f6ce.chunk.js.map": "/periodleaks/static/js/453.0593f6ce.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.102ca8b5.css",
+    "static/js/main.294194f8.js"
+  ]
+}
