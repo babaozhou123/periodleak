@@ -142,13 +142,13 @@ My last period might have been on ${lastPeriodDate}. It was ${viscosity.toLowerC
       <h2 className="text-3xl font-bold text-pink-500 mb-4 text-center">JD Vance wants your blood.</h2>
       <p className="text-purple-700 mb-6 text-sm sm:text-base">
         Senator Vance fought against federal privacy protections for your period data. He said cops and states should be able to use your data to predict who might be trying to leave red states for abortions.</p> 
-        <p>Cops don't become cops because they're good at math, otherwise they'd be real data scientists.</p> 
+        <p>Cops don't become cops because they're good at math. Cops aren't data scientists!</p> 
         <p>JD, you want this data for yourself, don't you? Dirty boy. If you're so eager to tap into our monthly flow of info, who are we to stem the tide?</p>
       <button 
         onClick={() => setShowIntro(false)} 
         className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-300"
       >
-        FEED THE BEAST
+        Give JD what he wants
       </button>
     </div>
   );
@@ -204,7 +204,7 @@ My last period might have been on ${lastPeriodDate}. It was ${viscosity.toLowerC
           {' '}sound.
         </p>
         <button type="submit" className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-300">
-          Feed this to JD
+          Send this to JD
         </button>
       </form>
     </div>
@@ -214,16 +214,16 @@ My last period might have been on ${lastPeriodDate}. It was ${viscosity.toLowerC
     <div style={cardStyle}>
       <h2 className="text-3xl font-bold text-pink-500 mb-4 text-center">Preview</h2>
       <p className="text-purple-700 mb-6 text-sm sm:text-base">
-        Dear JD,<br /><br />
+        Dear JD,<br />
         My last period might have been on {lastPeriodDate}. It was {viscosity.toLowerCase()} and smelled {smell.toLowerCase()}. 
         When the blood {flow.toLowerCase()} out, it made a {sound.toLowerCase()} sound. Enjoy, you little freak.
       </p>
       <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
         <button onClick={shareToInstagram} className="flex-1 bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-300">
-          Share to Instagram
+          Tag him on IG
         </button>
         <button onClick={emailToJD} className="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-300">
-          Email this to him
+          Email him
         </button>
       </div>
       <button 
