@@ -1,48 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import html2canvas from 'html2canvas';
-
-.madlib-form {
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.madlib-form select {
-  display: inline-block;
-  font-size: inherit;
-  font-family: inherit;
-  border: none;
-  border-bottom: 1px dashed #666;
-  background-color: transparent;
-  color: #d53f8c;  /* Or any color you prefer */
-  padding: 0 0.5em;
-  margin: 0 0.2em;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  cursor: pointer;
-}
-
-.madlib-form select:focus {
-  outline: none;
-  border-bottom-color: #d53f8c;
-}
-
-/* Custom dropdown arrow */
-.madlib-form select:after {
-  content: '▼';
-  position: absolute;
-  right: 5px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-
-/* Adjust width based on content */
-.madlib-form .auto-width {
-  width: auto;
-  min-width: 50px;  /* Adjust as needed */
-  max-width: 200px; /* Adjust as needed */
-}
+import './App.css';
 
 useEffect(() => {
   const adjustSelectWidth = () => {
