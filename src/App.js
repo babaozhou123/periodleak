@@ -47,13 +47,27 @@ const PeriodMadlibForm = () => {
   const resultRef = useRef(null);
   const [showIntro, setShowIntro] = useState(true);
 
-
   useEffect(() => {
     const img = new Image();
     img.crossOrigin = "Anonymous";
     img.src = y2kBackgrounds[Math.floor(Math.random() * y2kBackgrounds.length)].replace(/url\(['"](.+)['"]\)/, '$1');
     img.onload = () => setBackgroundImage(img);
   }, []);
+
+  const formStyle = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    width: '100%',
+  };
+  
+  const inputStyle = {
+    width: '100%',
+    marginBottom: '10px',
+    padding: '5px',
+    borderRadius: '4px',
+    border: '1px solid #ccc',
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -81,19 +95,23 @@ const PeriodMadlibForm = () => {
           }
         });
         
-        const image = canvas.toDataURL("image/png");
+        const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+        const file = new File([blob], 'period-madlib.png', { type: 'image/png' });
         
         if (navigator.share) {
           await navigator.share({
-            files: [new File([await (await fetch(image)).blob()], 'gross-period-madlib.png', { type: 'image/png' })],
+            files: [file],
             title: 'My Period for JD Vance',
             text: 'Enjoy, you little freak!'
           });
         } else {
+          // Fallback for browsers that don't support sharing files
+          const url = URL.createObjectURL(blob);
           const link = document.createElement('a');
-          link.download = 'gross-period-madlib.png';
-          link.href = image;
+          link.href = url;
+          link.download = 'period-madlib.png';
           link.click();
+          URL.revokeObjectURL(url);
         }
       } catch (error) {
         console.error('Error sharing:', error);
@@ -162,56 +180,56 @@ My last period might have been on ${lastPeriodDate}. It was ${viscosity.toLowerC
     <div style={cardStyle} className={`transition-all duration-300 ${isShaking ? 'animate-shake' : ''}`}>
       <h2 className="text-3xl font-bold text-pink-500 mb-4 text-center">Dear JD,</h2>
       <p className="text-purple-600 mb-6 text-center">I heard how badly you want to know about my period.</p>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <p className="text-purple-700 text-sm sm:text-base">
-          My last period might have been on{' '}
-          <input type="text" value={lastPeriodDate} readOnly className="inline-block w-40 px-1 py-0 border-b border-pink-300 focus:outline-none focus:border-purple-500 bg-transparent" />.
-          It was{' '}
-          <select
-            value={viscosity}
-            onChange={(e) => setViscosity(e.target.value)}
-            className="inline-block w-24 px-1 py-0 border-b border-pink-300 focus:outline-none focus:border-purple-500 bg-transparent"
-          >
-            {viscosityOptions.map((option) => (
-              <option key={option} value={option}>{option.toLowerCase()}</option>
-            ))}
-          </select>
-          {' '}and smelled{' '}
-          <select
-            value={smell}
-            onChange={(e) => setSmell(e.target.value)}
-            className="inline-block w-24 px-1 py-0 border-b border-pink-300 focus:outline-none focus:border-purple-500 bg-transparent"
-          >
-            {smellOptions.map((option) => (
-              <option key={option} value={option}>{option.toLowerCase()}</option>
-            ))}
-          </select>.
-          When the blood{' '}
-          <select
-            value={flow}
-            onChange={(e) => setFlow(e.target.value)}
-            className="inline-block w-28 px-1 py-0 border-b border-pink-300 focus:outline-none focus:border-purple-500 bg-transparent"
-          >
-            {flowOptions.map((option) => (
-              <option key={option} value={option}>{option.toLowerCase()}</option>
-            ))}
-          </select>
-          {' '}out, it made a{' '}
-          <select
-            value={sound}
-            onChange={(e) => setSound(e.target.value)}
-            className="inline-block w-24 px-1 py-0 border-b border-pink-300 focus:outline-none focus:border-purple-500 bg-transparent"
-          >
-            {soundOptions.map((option) => (
-              <option key={option} value={option}>{option.toLowerCase()}</option>
-            ))}
-          </select>
-          {' '}sound.
-        </p>
-        <button type="submit" className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-300">
-          Send this to JD
-        </button>
-      </form>
+      <form onSubmit={handleSubmit} style={formStyle}>
+  <p className="text-purple-700 text-sm sm:text-base">
+    My last period might have been on{' '}
+    <input type="text" value={lastPeriodDate} readOnly style={inputStyle} />
+    . It was{' '}
+    <select
+      value={viscosity}
+      onChange={(e) => setViscosity(e.target.value)}
+      style={inputStyle}
+    >
+      {viscosityOptions.map((option) => (
+        <option key={option} value={option}>{option.toLowerCase()}</option>
+      ))}
+    </select>
+    {' '}and smelled{' '}
+    <select
+      value={smell}
+      onChange={(e) => setSmell(e.target.value)}
+      style={inputStyle}
+    >
+      {smellOptions.map((option) => (
+        <option key={option} value={option}>{option.toLowerCase()}</option>
+      ))}
+    </select>
+    . When the blood{' '}
+    <select
+      value={flow}
+      onChange={(e) => setFlow(e.target.value)}
+      style={inputStyle}
+    >
+      {flowOptions.map((option) => (
+        <option key={option} value={option}>{option.toLowerCase()}</option>
+      ))}
+    </select>
+    {' '}out, it made a{' '}
+    <select
+      value={sound}
+      onChange={(e) => setSound(e.target.value)}
+      style={inputStyle}
+    >
+      {soundOptions.map((option) => (
+        <option key={option} value={option}>{option.toLowerCase()}</option>
+      ))}
+    </select>
+    {' '}sound.
+  </p>
+  <button type="submit" className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-300">
+    Send this to JD
+  </button>
+</form>
     </div>
   );
 
