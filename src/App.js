@@ -1,6 +1,71 @@
 import React, { useState, useEffect, useRef } from 'react';
 import html2canvas from 'html2canvas';
 
+.madlib-form {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.madlib-form select {
+  display: inline-block;
+  font-size: inherit;
+  font-family: inherit;
+  border: none;
+  border-bottom: 1px dashed #666;
+  background-color: transparent;
+  color: #d53f8c;  /* Or any color you prefer */
+  padding: 0 0.5em;
+  margin: 0 0.2em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+.madlib-form select:focus {
+  outline: none;
+  border-bottom-color: #d53f8c;
+}
+
+/* Custom dropdown arrow */
+.madlib-form select:after {
+  content: '▼';
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Adjust width based on content */
+.madlib-form .auto-width {
+  width: auto;
+  min-width: 50px;  /* Adjust as needed */
+  max-width: 200px; /* Adjust as needed */
+}
+
+useEffect(() => {
+  const adjustSelectWidth = () => {
+    document.querySelectorAll('.auto-width').forEach(select => {
+      const selectedOption = select.options[select.selectedIndex];
+      const tempSpan = document.createElement('span');
+      tempSpan.className = select.className;
+      tempSpan.style.visibility = 'hidden';
+      tempSpan.style.position = 'fixed';
+      tempSpan.textContent = selectedOption.textContent;
+      document.body.appendChild(tempSpan);
+      const width = tempSpan.getBoundingClientRect().width;
+      document.body.removeChild(tempSpan);
+      select.style.width = `${width + 20}px`; // Add some padding
+    });
+  };
+
+  adjustSelectWidth();
+  window.addEventListener('resize', adjustSelectWidth);
+
+  return () => window.removeEventListener('resize', adjustSelectWidth);
+}, [viscosity, smell, flow, sound]); // Re-run when these values change
+
 const generateRandomDate = () => {
   const today = new Date();
   const randomDaysAgo = Math.floor(Math.random() * 28) + 1;
@@ -180,15 +245,13 @@ My last period might have been on ${lastPeriodDate}. It was ${viscosity.toLowerC
     <div style={cardStyle} className={`transition-all duration-300 ${isShaking ? 'animate-shake' : ''}`}>
       <h2 className="text-3xl font-bold text-pink-500 mb-4 text-center">Dear JD,</h2>
       <p className="text-purple-600 mb-6 text-center">I heard how badly you want to know about my period.</p>
-      <form onSubmit={handleSubmit} style={formStyle}>
+      <form onSubmit={handleSubmit} className="madlib-form">
   <p className="text-purple-700 text-sm sm:text-base">
-    My last period might have been on{' '}
-    <input type="text" value={lastPeriodDate} readOnly style={inputStyle} />
-    . It was{' '}
+    My last period might have been on {lastPeriodDate}. It was{' '}
     <select
       value={viscosity}
       onChange={(e) => setViscosity(e.target.value)}
-      style={inputStyle}
+      className="auto-width"
     >
       {viscosityOptions.map((option) => (
         <option key={option} value={option}>{option.toLowerCase()}</option>
@@ -198,7 +261,7 @@ My last period might have been on ${lastPeriodDate}. It was ${viscosity.toLowerC
     <select
       value={smell}
       onChange={(e) => setSmell(e.target.value)}
-      style={inputStyle}
+      className="auto-width"
     >
       {smellOptions.map((option) => (
         <option key={option} value={option}>{option.toLowerCase()}</option>
@@ -208,7 +271,7 @@ My last period might have been on ${lastPeriodDate}. It was ${viscosity.toLowerC
     <select
       value={flow}
       onChange={(e) => setFlow(e.target.value)}
-      style={inputStyle}
+      className="auto-width"
     >
       {flowOptions.map((option) => (
         <option key={option} value={option}>{option.toLowerCase()}</option>
@@ -218,7 +281,7 @@ My last period might have been on ${lastPeriodDate}. It was ${viscosity.toLowerC
     <select
       value={sound}
       onChange={(e) => setSound(e.target.value)}
-      style={inputStyle}
+      className="auto-width"
     >
       {soundOptions.map((option) => (
         <option key={option} value={option}>{option.toLowerCase()}</option>
