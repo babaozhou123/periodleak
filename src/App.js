@@ -121,7 +121,7 @@ My last period might have been on ${lastPeriodDate}. It was ${viscosity.toLowerC
     backgroundImage: backgroundImage ? `url(${backgroundImage.src})` : 'none',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    fontFamily: "'Comic Sans MS', cursive",
+    fontFamily: "'Comic Neue', 'Comic Sans MS', 'Chalkboard SE', sans-serif",
     boxSizing: 'border-box',
     overflowX: 'hidden',
   };
